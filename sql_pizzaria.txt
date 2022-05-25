@@ -1,0 +1,37 @@
+create database pizzaria;
+use pizzaria;
+create table endereco(
+idendereco int,
+rua varchar(45),
+numero int,
+bairro varchar(45),
+cidade varchar(45),
+primary key(idendereco)
+);
+
+create table pizzaria.cliente(
+idcliente int,
+nome varchar(45),
+email varchar(45),
+telefone int,
+endereco_idendereco int,
+primary key(idcliente),
+constraint fk_cliente_endereco foreign key (endereco_idendereco) references endereco(idendereco) 
+
+);
+
+
+create table pizzaria.produtos(
+idproduto int,
+nome varchar(45),
+primary key(idproduto)
+);
+
+create table pizzaria.pedido(
+cliente_idcliente int,
+produtos_idproduto int,
+primary key(cliente_idcliente),
+constraint fk_pedido_cliente foreign key (cliente_idcliente) references cliente(idcliente),
+constraint fk_pedido_produtos foreign key (produtos_idproduto) references produtos(idproduto)
+
+);
